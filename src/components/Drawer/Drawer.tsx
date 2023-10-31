@@ -52,7 +52,11 @@ export default function PermanentDrawerLeft() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        sx={{
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`,
+          backgroundColor: "white",
+        }}
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
@@ -65,6 +69,7 @@ export default function PermanentDrawerLeft() {
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
+            backgroundColor: "#F3F2FE",
             width: drawerWidth,
             boxSizing: "border-box",
           },
