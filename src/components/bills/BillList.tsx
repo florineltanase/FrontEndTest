@@ -66,7 +66,7 @@ const Bills = () => {
       },
     },
   ];
-
+  console.log(bills, "ce");
   return (
     <div>
       <div className="mb-[30px] mt-[50px] flex justify-end ">

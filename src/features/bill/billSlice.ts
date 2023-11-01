@@ -30,7 +30,7 @@ const initialState: InitialState = {
 };
 
 export const fetchBills = createAsyncThunk(
-  "invoice/fetchInvoice",
+  "bill/fetchBill",
   async ({ page, perPage }) => {
     const response = await axios.get(
       `/documents?search=type:bill&page=${page}&limit=${perPage}`
