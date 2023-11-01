@@ -1,12 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://api.punkapi.com/v2', 
-    headers: {
-      "Access-Control-Allow-Origin" : "*",
-      'Content-Type': 'application/json',
-    },
-    // withCredentials: true, 
-  });
-  
+  baseURL: "https://ak.contentcubed.com/api",
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  },
+  auth: {
+    username: import.meta.env.VITE_USER,
+    password: import.meta.env.VITE_PASSWORD,
+  },
+});
+
 export default instance;
