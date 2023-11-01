@@ -101,7 +101,7 @@ const Invoices = () => {
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[5, 10, 25]}
-          rowCount={200}
+          rowCount={invoices.totalCount}
           loading={invoices.loading}
           checkboxSelection
           sx={{

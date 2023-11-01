@@ -14,12 +14,19 @@ type InitialState = {
   loading: boolean;
   invoices: Invoice[];
   error: string;
+  totalCount: number;
+};
+
+type InvoiceFullfilledPayload = {
+  data: Invoice[];
+  totalRows: number;
 };
 
 const initialState: InitialState = {
   loading: false,
   invoices: [],
   error: "",
+  totalCount: 0,
 };
 
 export const fetchInvoices = createAsyncThunk(
@@ -28,7 +35,9 @@ export const fetchInvoices = createAsyncThunk(
     const response = await axios.get(
       `/documents?search=type:invoice&page=${page}&limit=${perPage}`
     );
-    return response.data.data;
+    const { data, meta } = response.data;
+    const totalRows = meta.total;
+    return { data, totalRows };
   }
 );
 
@@ -41,9 +50,10 @@ export const invoiceSlice = createSlice({
     });
     builder.addCase(
       fetchInvoices.fulfilled,
-      (state, action: PayloadAction<Invoice[]>) => {
+      (state, action: PayloadAction<InvoiceFullfilledPayload>) => {
         (state.loading = false),
-          (state.invoices = action.payload),
+          (state.invoices = action.payload.data),
+          (state.totalCount = action.payload.totalRows),
           (state.error = "");
       }
     );

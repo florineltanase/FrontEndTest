@@ -66,42 +66,38 @@ const Bills = () => {
       },
     },
   ];
-  console.log(bills, "ce");
+
   return (
     <div>
       <div className="mb-[30px] mt-[50px] flex justify-end ">
         <Actions />
       </div>
 
-      {bills.loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <DataGrid
-            key={paginationModel.page}
-            rows={bills.bills}
-            columns={columns}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            pageSizeOptions={[5, 10, 25]}
-            rowCount={bills.totalCount}
-            loading={bills.loading}
-            checkboxSelection
-            sx={{
-              " & .MuiDataGrid-columnHeaders": {
-                backgroundColor: "#EEEEEE",
-              },
-              "& .MuiDataGrid-footerContainer": {
-                backgroundColor: "#EEEEEE",
-              },
-              "& .MuiDataGrid-columnHeaderTitle": {
-                fontWeight: "bold",
-              },
-              "& .MuiDataGrid-row": { color: "black" },
-            }}
-          />
-        </div>
-      )}
+      <div>
+        <DataGrid
+          key={paginationModel.page}
+          rows={bills.bills}
+          columns={columns}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          pageSizeOptions={[5, 10, 25]}
+          rowCount={bills.totalCount}
+          loading={bills.loading}
+          checkboxSelection
+          sx={{
+            " & .MuiDataGrid-columnHeaders": {
+              backgroundColor: "#EEEEEE",
+            },
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: "#EEEEEE",
+            },
+            "& .MuiDataGrid-columnHeaderTitle": {
+              fontWeight: "bold",
+            },
+            "& .MuiDataGrid-row": { color: "black" },
+          }}
+        />
+      </div>
 
       <BasicModal open={openModal} setOpen={setOpenModal} />
     </div>
