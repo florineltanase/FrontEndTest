@@ -142,7 +142,7 @@ export default function PermanentDrawerLeft() {
           flexGrow: 1,
           bgcolor: "background.default",
           p: 3,
-          height: "100vh",
+          minHeight: "100vh",
         }}
       >
         <Toolbar />

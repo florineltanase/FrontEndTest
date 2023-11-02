@@ -31,11 +31,11 @@ const initialState: InitialState = {
 
 export const fetchBills = createAsyncThunk(
   "bill/fetchBill",
-  async ({ page, perPage }) => {
+  async ({ page, perPage }: { page: number; perPage: number }) => {
     const response = await axios.get(
       `/documents?search=type:bill&page=${page}&limit=${perPage}`
     );
-    const { data, meta } = response.data;
+    const { data, meta } = response.data; //we need the total numbers of elements from the array
     const totalRows = meta.total;
     return { data, totalRows };
   }

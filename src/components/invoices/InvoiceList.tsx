@@ -12,36 +12,27 @@ import { fetchInvoices } from "../../features/invoice/invoiceSlice";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 const Invoices = () => {
+  const invoices = useAppSelector((state) => state.invoices);
+  const dispatch = useAppDispatch();
+
+  const [openModal, setOpenModal] = useState(false);
+  const [invoiceData, setInvoiceData] = useState({
+    contact_name: "",
+    contact_address: "",
+    contact_email: "",
+    contact_phone: "",
+    amount_formatted: "",
+    document_number: "",
+    issued_at: "",
+    items: {
+      data: [],
+    },
+  });
+
   const [paginationModel, setPaginationModel] = React.useState({
     pageSize: 25,
     page: 0,
   });
-
-  const [openModal, setOpenModal] = useState(false);
-
-  // const fetchInvoices = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const response = await axios.get(
-  //       `/documents?search=type:invoice&page=${paginationModel.page}&limit=${paginationModel.pageSize}`
-  //     );
-
-  //     setInvoices(response.data.data);
-  //     setTotalRowCount(response.data.meta.total);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //     setInvoices([]);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // React.useEffect(() => {
-  //   fetchInvoices();
-  // }, [paginationModel.page, totalRowCount, paginationModel.pageSize]);
-
-  const invoices = useAppSelector((state) => state.invoices);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(
@@ -70,15 +61,17 @@ const Invoices = () => {
       headerName: "Actions",
       width: 100,
       cellClassName: "actions",
-      getActions: ({ id }) => {
+      getActions: (params) => {
         return [
           <GridActionsCellItem
             icon={<ModeEditOutlineOutlinedIcon />}
-            label="Save"
+            label="Open"
             sx={{
               color: "primary.main",
             }}
             onClick={() => {
+              //setting the state with the data from the row in order to use it in the modal
+              setInvoiceData(params.row);
               setOpenModal(true);
             }}
           />,
@@ -119,7 +112,7 @@ const Invoices = () => {
         />
       </div>
 
-      <BasicModal open={openModal} setOpen={setOpenModal} />
+      <BasicModal open={openModal} setOpen={setOpenModal} data={invoiceData} />
     </div>
   );
 };

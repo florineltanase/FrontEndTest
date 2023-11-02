@@ -31,11 +31,11 @@ const initialState: InitialState = {
 
 export const fetchInvoices = createAsyncThunk(
   "invoice/fetchInvoice",
-  async ({ page, perPage }) => {
+  async ({ page, perPage }: { page: number; perPage: number }) => {
     const response = await axios.get(
       `/documents?search=type:invoice&page=${page}&limit=${perPage}`
     );
-    const { data, meta } = response.data;
+    const { data, meta } = response.data; //we need the total numbers of elements from the array
     const totalRows = meta.total;
     return { data, totalRows };
   }
@@ -45,6 +45,7 @@ export const invoiceSlice = createSlice({
   name: "invoice",
   initialState,
   extraReducers: (builder) => {
+    //invoices
     builder.addCase(fetchInvoices.pending, (state) => {
       state.loading = true;
     });
@@ -65,6 +66,7 @@ export const invoiceSlice = createSlice({
           : "An error occured");
     });
   },
+
   reducers: {},
 });
 
