@@ -142,6 +142,7 @@ const BasicModal = ({ open, setOpen, data }: BasicModalProps) => {
                   total_formatted: string;
                 }) => (
                   <div
+                    key={el.id}
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
